@@ -15,8 +15,9 @@ ol {
     list-style-type: none;
     display: grid;
     width: max-content;
+    gap: 10px;
     grid-template-columns: repeat(7, 1fr);
-    margin: 0;
+    margin: 20px auto;
     padding: 0;
 }
 
