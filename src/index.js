@@ -8,11 +8,23 @@ const intl = new Intl.DateTimeFormat(locale, { month: "long" });
 const calendar = months.map(monthKey => {
     const monthName = intl.format(new Date(currentYear, monthKey));
     console.log(monthName);
-    return { monthName };
+
+    const nextMonthIndex = monthKey + 1;
+    const daysOfMonth = new Date(2022, nextMonthIndex, 0).getDate()
+
+    console.log(daysOfMonth);
+    return {
+        monthName,
+        daysOfMonth,
+        startsOn: 0
+    };
 })
 
-const html = calendar.map(({ monthName }) => {
-    return `<h1>${monthName} ${currentYear}</h1>`
+const html = calendar.map(({ daysOfMonth, monthName }) => {
+    const days = [...Array(daysOfMonth).keys()];
+    const renderedDays = days.map(day => `<li>${day + 1}</li>`).join('');
+    return `<h1>${monthName} ${currentYear}</h1>
+    <ol>${renderedDays}</ol>`
 }).join('');
 
 document.querySelector('div').innerHTML = html
